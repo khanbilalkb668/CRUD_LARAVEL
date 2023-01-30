@@ -61,14 +61,16 @@ class User extends Controller
 
 
      }
-     private function store_number(array $request, $id){
+     private function store_number($id,array $request ){
         
 
-        $num1 = new Number;
+        $num1 = new Number();
         $data = [['st_id' => $id, 'mobile' => $request['mobile1']], ['st_id' => $id, 'mobile' => $request['mobile2']], ['st_id' => $id, 'mobile' => $request['mobile3']]];
         // $num1->st_id = $id;
         // $num1->mobile = $request->mobile1;
+        // echo $data;
         $num1->insert($data);
+       
 
         // if($request->mobile2!="")
         // {
@@ -109,10 +111,11 @@ class User extends Controller
         //print_r($data);
         //print_r($request->all());
         //
-        $contact = new Contact;
+        $contact = new Contact();
         
        $this->store_contact($contact,$request->all());
-       $this->store_number($request->all(),$contact->id);
+       $this->store_number($contact->id,$request->all());
+        return redirect("user");
     }
 
     /**
@@ -173,13 +176,13 @@ class User extends Controller
         Contact::where('id',$id)->update($data);
 
         $num=['mobile'=> $request->mobile1];
-        Number::where('id',$request->id1)->update($num);
+        Number::where('st_id',$id)->update($num);
 
         $num=['mobile'=> $request->mobile2];
-        Number::where('id',$request->id2)->update($num);
+        Number::where('st_id',$id)->update($num);
 
         $num=['mobile'=> $request->mobile3];
-        Number::where('id',$request->id3)->update($num);
+        Number::where('st_id',$id)->update($num);
        // print_r($request->all());
         //
     }
@@ -194,8 +197,14 @@ class User extends Controller
     {
 
         //user/id (DEELETE)
-        $user = Contact::find($id);
-        $user->delete();
-        return redirect('user');
+        // $user = Contact::find($id);
+        // $user->delete();
+        // return redirect('user');
+    
+        Contact::where('id',$id)->delete();
+        Number::where('st_id',$id)->delete();
+        return redirect("user");
+            # code...
+        }
     }
-}
+
