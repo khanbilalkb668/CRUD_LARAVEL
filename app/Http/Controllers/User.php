@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
 use App\Contact;
@@ -206,5 +207,12 @@ class User extends Controller
         return redirect("user");
             # code...
         }
+    public function bilal()
+    {
+
+        $var = Number::onlyTrashed()->get();
+        return UserCollection::collection($var);
+
+    }
     }
 
