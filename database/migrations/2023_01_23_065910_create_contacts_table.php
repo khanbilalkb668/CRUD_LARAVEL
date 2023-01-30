@@ -17,7 +17,6 @@ class CreateContactsTable extends Migration
            
                 $table->increments('id');
                 $table->string('name',100);
-                $table->bigInteger('mobile')->unique();
                 $table->string('email',20)->unique();
                 $table->string('address',200);
                 $table->string('company',100);

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropMobieContactsTable extends Migration
+class DeleteColoumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class DropMobieContactsTable extends Migration
      */
     public function up()
     {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn('mobile');
+        Schema::table('numbers', function (Blueprint $table) {
+
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +26,9 @@ class DropMobieContactsTable extends Migration
      */
     public function down()
     {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->bigInteger('mobile')->unique();
-        });
+        // Schema::table('numbers', function (Blueprint $table) {
+
+        //     $table->dropSoftDeletes();
+        // });
     }
 }

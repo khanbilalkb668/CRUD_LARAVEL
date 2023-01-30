@@ -201,7 +201,7 @@ class User extends Controller
         // $user->delete();
         // return redirect('user');
     
-        Contact::where('id',$id)->delete();
+        // Contact::where('id',$id)->delete();
         Number::where('st_id',$id)->delete();
         return redirect("user");
             # code...

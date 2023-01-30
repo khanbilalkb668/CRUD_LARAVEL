@@ -16,10 +16,9 @@ class CreateNumbersTable extends Migration
             $table->increments('id');
             $table->bigInteger('mobile')->unique();
             $table->unsignedInteger('st_id');
-            $table->foreign('st_id')->references('id')->on('contacts')->onDelete('cascade');
-            
+            $table->foreign('st_id')->references('id')->on('contacts');
             $table->timestamps();
-             $table->softDeletes();
+            //  $table->softDeletes();
         });
     }
 
